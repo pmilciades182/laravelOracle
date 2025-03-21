@@ -1,106 +1,99 @@
-# Laravel + React + Oracle con Docker
+# Laravel Oracle
 
-Este proyecto es una aplicación web que utiliza Laravel 12, React y Oracle Database, todo configurado con Docker Compose.
+Este proyecto es una aplicación web desarrollada con Laravel que utiliza Oracle como base de datos principal.
 
-## Requisitos
+## Requisitos Previos
 
-- Docker
-- Docker Compose
+- PHP >= 8.1
+- Composer
+- Node.js & NPM
+- Oracle Database
+- Docker (opcional)
 
 ## Instalación
 
 1. Clonar el repositorio:
 ```bash
-git clone <url-del-repositorio>
-cd laravel-oracle
+git clone https://github.com/pmilciades182/laravelOracle.git
+cd laravelOracle
 ```
 
-2. Copiar el archivo de entorno:
+2. Instalar dependencias de PHP:
+```bash
+composer install
+```
+
+3. Instalar dependencias de Node.js:
+```bash
+npm install
+```
+
+4. Configurar el archivo de entorno:
 ```bash
 cp .env.example .env
+php artisan key:generate
 ```
 
-3. Generar la clave de la aplicación:
-```bash
-docker-compose run --rm app php artisan key:generate
-```
-
-4. Iniciar los contenedores:
-```bash
-docker-compose up -d
-```
-
-5. Instalar dependencias de Node.js:
-```bash
-docker-compose run --rm app npm install
+5. Configurar la conexión a Oracle en el archivo `.env`:
+```env
+DB_CONNECTION=oracle
+DB_HOST=tu_host_oracle
+DB_PORT=1521
+DB_DATABASE=tu_base_de_datos
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
 ```
 
 6. Compilar assets:
 ```bash
-docker-compose run --rm app npm run dev
+npm run dev
 ```
 
-7. Ejecutar migraciones:
+## Configuración de Docker
+
+El proyecto incluye configuración de Docker para desarrollo. Para iniciar el entorno Docker:
+
 ```bash
-docker-compose run --rm app php artisan migrate
+docker-compose up -d
 ```
 
-## Acceso a la aplicación
+## Estructura del Proyecto
 
-- Frontend: http://localhost:8000
-- API: http://localhost:8000/api
-
-## Estructura del proyecto
-
-- `app/` - Código de la aplicación Laravel
-- `resources/js/` - Componentes y páginas de React
-- `docker/` - Configuraciones de Docker
+- `app/` - Contiene la lógica principal de la aplicación
+- `config/` - Archivos de configuración
 - `database/` - Migraciones y seeders
+- `resources/` - Vistas y assets
+- `routes/` - Definición de rutas
+- `tests/` - Pruebas unitarias y de integración
 
-## Servicios
+## Tecnologías Utilizadas
 
-- Laravel (PHP 8.2 + FPM)
-- Nginx
-- Oracle Database Express Edition
-- React (con Inertia.js)
+- Laravel 10.x
+- Oracle Database
+- Inertia.js
+- React
+- Tailwind CSS
+- Docker
 
-## Desarrollo
+## Scripts Disponibles
 
-Para desarrollo local:
+- `validate-oracle.sh` - Script para validar la conexión a Oracle
+- `test-oracle.php` - Script PHP para probar la conexión a Oracle
 
-1. Compilar assets en modo desarrollo:
-```bash
-docker-compose run --rm app npm run dev
-```
+## Contribución
 
-2. Ver logs:
-```bash
-docker-compose logs -f
-```
+1. Fork el proyecto
+2. Crea tu rama de características (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
 
-3. Acceder al contenedor de Laravel:
-```bash
-docker-compose exec app bash
-```
+## Licencia
 
-## Producción
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 
-Para producción:
+## Contacto
 
-1. Compilar assets para producción:
-```bash
-docker-compose run --rm app npm run build
-```
+Tu Nombre - [@tu_twitter](https://twitter.com/tu_twitter)
 
-2. Optimizar Laravel:
-```bash
-docker-compose run --rm app php artisan optimize
-```
-
-## Notas
-
-- La base de datos Oracle se inicializa automáticamente al primer inicio
-- Las credenciales por defecto de Oracle son:
-  - Usuario: system
-  - Contraseña: oracle
-  - SID: XE
+Link del Proyecto: [https://github.com/pmilciades182/laravelOracle](https://github.com/pmilciades182/laravelOracle)
